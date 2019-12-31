@@ -9,6 +9,8 @@ GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	obj[2].position = sf::Vector2f(60.f,590.f);
 	obj[3].position = sf::Vector2f(48.f,540.f);
 	for(int i=0; i<4; i++)	obj[i].color = sf::Color::Green;
+	
+	obj.setPhysics();
 }
 
 bool GAME::UpDateStatus( int key_input, sf::Time time ){
@@ -18,18 +20,27 @@ bool GAME::UpDateStatus( int key_input, sf::Time time ){
 //			break;
 			case 2: //LEFT
 //				std::cout<< time.asMicroseconds() << std::endl;
-				obj.MoveIt( -0.05*time.asMicroseconds(), 0 );
+				obj.MoveCentre( -0.05*time.asMicroseconds(), 0 );
+				obj.UpdateSOLID();
 			break;
 			case 3: //RIGHT
 //				std::cout<< time.asMicroseconds() << std::endl;
-				obj.MoveIt( 0.05*time.asMicroseconds(), 0 );
-			break;
+				obj.MoveCentre( 0.05*time.asMicroseconds(), 0 );
+				obj.UpdateSOLID();
+			break;	
 		}
+	if(!InBoundary( obj )){
+//		std::cout<< " Out of boundary " << std::endl;
+		obj.resetPOS();
+		obj.UpdateSOLID();
+	}
+
 }
 
 void GAME::DRAW(){
 	G_window.clear(sf::Color::Black);
 	G_window.draw(obj);
+	G_window.draw( &(obj.Masscenter), 1, sf::Points);
 	G_window.display();
 }
 
@@ -40,7 +51,6 @@ bool GAME::InBoundary( SOLID& solid_obj ){
 			return 0;
 		else if( solid_obj[i].position.x < 0 || solid_obj[i].position.x > 600 ) 
 			return 0;
-		else return 1;
-
 	}
+return 1;
 }

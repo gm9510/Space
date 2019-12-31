@@ -3,11 +3,16 @@
 
 class SOLID : public sf::VertexArray{
 private:
-
+	
 public:
 	SOLID();
 	SOLID( int nodes );
-	void MoveIt( double dx, double dy );
+	void MoveCentre( double dx, double dy );
+	void resetPOS();
+	void UpdateSOLID();
+	void setPhysics();
+	sf::Vertex Masscenter;
+	sf::Vertex D_Masscenter;
 };
 
 class GAME{
@@ -17,7 +22,7 @@ class GAME{
 	GAME( sf::RenderWindow& window );
 	bool UpDateStatus(int key_input, sf::Time time);
 	void DRAW();
-	bool InBoundary( SOLID solid_obj );
+	bool InBoundary( SOLID& solid_obj );
 	SOLID obj;
 };
 
