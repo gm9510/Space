@@ -20,9 +20,9 @@ class GAME{
 	sf::RenderWindow& G_window;
   public:
 	GAME( sf::RenderWindow& window );
-	bool UpDateStatus(int key_input, sf::Time time);
+	bool UpDateStatus(int key_input, sf::Time time, double& vel);
 	void DRAW();
 	bool InBoundary( SOLID& solid_obj );
-	SOLID obj;
+	SOLID Player, Enemy;
 };
 
