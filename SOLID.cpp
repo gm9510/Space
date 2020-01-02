@@ -8,29 +8,29 @@ SOLID::SOLID( int nodes ): VertexArray( sf::TriangleStrip, nodes ){
 Masscenter.color = sf::Color::White;
 }
 
-void SOLID::MoveCentre( double dx, double dy ){
-	D_Masscenter.position.x = dx;
-	D_Masscenter.position.y = dy;
+void SOLID::MovePOS( double dx, double dy ){
+
+	prev_Masscenter.position = Masscenter.position;
 	Masscenter.position.x += dx;
 	Masscenter.position.y += dy;
-	
+// redraw the shape around the mass center
+	for(int i=0; i<this->getVertexCount(); i++){
+		(*this)[i].position = Shape[i].position + Masscenter.position;
+	}
 }
 
 void SOLID::resetPOS(){
-	D_Masscenter.position = -D_Masscenter.position;
-	Masscenter.position.x += D_Masscenter.position.x;
-	Masscenter.position.y += D_Masscenter.position.y;
-}
-
-void SOLID::UpdateSOLID(){
-	
+	Masscenter.position = prev_Masscenter.position;
+// redraw the shape around the mass center
 	for(int i=0; i<this->getVertexCount(); i++){
-		(*this)[i].position.x += D_Masscenter.position.x;
-		(*this)[i].position.y += D_Masscenter.position.y;
+		(*this)[i].position = Shape[i].position + Masscenter.position;
 	}
 }
 
 void SOLID::setPhysics(){
+//------------------------------------------------------------------------------------------
+//       Establish the the centre of as function of the drawble vertex array
+//------------------------------------------------------------------------------------------
 	double Tx=0;
 	double Ty=0;
 	int N = this->getVertexCount();
@@ -43,5 +43,12 @@ void SOLID::setPhysics(){
 		}
 		Masscenter.position.x += Tx/(N-2);
 		Masscenter.position.y += Ty/(N-2);
+	}
+
+	sf::Vector2f buff; // this could be dinamically allocated!
+	for(int i=0; i<N; i++){
+		buff = (*this)[i].position - Masscenter.position;
+		Shape.push_back( sf::Vertex( buff ) );
+//		std::cout<<"["<<i<<"] x = "<< Shape[i].position.x << " y = "<< Shape[i].position.y <<std::endl;
 	}
 }

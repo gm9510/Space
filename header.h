@@ -1,18 +1,18 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector> 
 
 class SOLID : public sf::VertexArray{
 private:
-	
+	std::vector<sf::Vertex> Shape;
 public:
 	SOLID();
 	SOLID( int nodes );
-	void MoveCentre( double dx, double dy );
+	void MovePOS( double dx, double dy );
 	void resetPOS();
-	void UpdateSOLID();
 	void setPhysics();
 	sf::Vertex Masscenter;
-	sf::Vertex D_Masscenter;
+	sf::Vertex prev_Masscenter;
 };
 
 class GAME{

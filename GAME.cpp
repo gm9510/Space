@@ -20,19 +20,16 @@ bool GAME::UpDateStatus( int key_input, sf::Time time ){
 //			break;
 			case 2: //LEFT
 //				std::cout<< time.asMicroseconds() << std::endl;
-				obj.MoveCentre( -0.05*time.asMicroseconds(), 0 );
-				obj.UpdateSOLID();
+				obj.MovePOS( -0.05*time.asMicroseconds(), 0 );
 			break;
 			case 3: //RIGHT
 //				std::cout<< time.asMicroseconds() << std::endl;
-				obj.MoveCentre( 0.05*time.asMicroseconds(), 0 );
-				obj.UpdateSOLID();
+				obj.MovePOS( 0.05*time.asMicroseconds(), 0 );
 			break;	
 		}
 	if(!InBoundary( obj )){
 //		std::cout<< " Out of boundary " << std::endl;
 		obj.resetPOS();
-		obj.UpdateSOLID();
 	}
 
 }
