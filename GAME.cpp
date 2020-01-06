@@ -6,9 +6,9 @@ GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	Player.setPrimitiveType(sf::TriangleStrip);
 	
 	Player[0].position = sf::Vector2f(10.f,590.f);
-	Player[1].position = sf::Vector2f(22.f,540.f);
+	Player[1].position = sf::Vector2f(10.f,540.f);
 	Player[2].position = sf::Vector2f(60.f,590.f);
-	Player[3].position = sf::Vector2f(48.f,540.f);
+	Player[3].position = sf::Vector2f(60.f,540.f);
 	for(int i=0; i<4; i++)	Player[i].color = sf::Color::Green;
 	
 	Player.setPhysics();
@@ -25,6 +25,7 @@ GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	for(int i=0; i<4; i++)	Enemy[i].color = sf::Color::Red;
 	
 	Enemy.setPhysics();
+	Enemy_draw = true;
 }
 
 bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
@@ -32,6 +33,12 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 //         Player Movement
 //........................................
 	switch(key_input){
+			case 0: //UP
+				Player.MovePOS( 0, -0.01*time.asMicroseconds() );
+			break;
+            case 1: //DOWN
+				Player.MovePOS( 0, 0.01*time.asMicroseconds() );
+			break;
 			case 2: //LEFT
 				Player.MovePOS( -0.01*time.asMicroseconds(), 0 );
 			break;
@@ -39,19 +46,33 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 				Player.MovePOS( 0.01*time.asMicroseconds(), 0 );
 			break;	
 		}
-	if(!InBoundary( Player )){ 
+	if(!InBoundary( Player )){
 		Player.resetPOS();
 	}
 //........................................
 //         Enemy Movement
 //........................................
+	if(Enemy_draw){
+		if(!InBoundary( Enemy )){
+			vel = -vel;
+			Enemy.resetPOS();
+		}
+		else{
+			Enemy.MovePOS( vel*time.asMicroseconds(), 0 );
+		}
+	}
+//........................................
+//         Collisions
+//........................................
 	
-	if(!InBoundary( Enemy )){
-		vel = -vel;
-		Enemy.resetPOS();
+	if(Player.getBounds().intersects(Enemy.getBounds())){
+		std::cout<< "intersects"<<  std::endl;
+		Enemy.MovePOS( 0, -300 );
+		Enemy_draw = false;
+		Player.resetPOS();
 	}
 	else{
-		Enemy.MovePOS( vel*time.asMicroseconds(), 0 );
+		//std::cout<< "do not intersects"<<  std::endl;
 	}
 
 }
@@ -68,7 +89,7 @@ bool GAME::InBoundary( SOLID& solid_obj ){
 	for(int i=0; i<solid_obj.getVertexCount(); i++){
 		if( solid_obj[i].position.x < 0 || solid_obj[i].position.x > 600 )
 			return 0;
-		else if( solid_obj[i].position.x < 0 || solid_obj[i].position.x > 600 ) 
+		else if( solid_obj[i].position.y < 0 || solid_obj[i].position.y > 600 ) 
 			return 0;
 	}
 return 1;

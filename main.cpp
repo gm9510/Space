@@ -9,7 +9,7 @@ int main(){
 	Clock clock;
 	Time time = clock.getElapsedTime();
 	int input = -1;
-	double vel = 0.01;
+	double vel = 0.01f;
 	
 	while(window.isOpen()){
 		Event event;
@@ -17,7 +17,8 @@ int main(){
 			if(event.type == Event::Closed) window.close();
 		   //Update Inputs
 			else if(event.type == Event::KeyPressed){
-				if (event.key.code==Keyboard::Space)  input = 1;
+				if (event.key.code==Keyboard::Up)  input = 0;
+				else if (event.key.code==Keyboard::Down)  input = 1;
 				else if (event.key.code==Keyboard::Left) input = 2;
 				else if (event.key.code==Keyboard::Right) input = 3;
 				else input = -1;

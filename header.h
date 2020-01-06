@@ -19,10 +19,11 @@ class GAME{
   private:
 	sf::RenderWindow& G_window;
   public:
-	GAME( sf::RenderWindow& window );
-	bool UpDateStatus(int key_input, sf::Time time, double& vel);
+	GAME( sf::RenderWindow& window ); //Intialization
+ 	bool UpDateStatus( int key_input, sf::Time time, double& vel );
 	void DRAW();
 	bool InBoundary( SOLID& solid_obj );
-	SOLID Player, Enemy;
+	bool Enemy_draw; 
+	SOLID Player, Enemy, bullet;
 };
 
