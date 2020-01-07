@@ -20,7 +20,23 @@ void SOLID::MovePOS( double dx, double dy ){
 }
 
 void SOLID::resetPOS(){
-	Masscenter.position = prev_Masscenter.position;
+	this->Masscenter.position = this->prev_Masscenter.position;
+// redraw the shape around the mass center
+	for(int i=0; i<this->getVertexCount(); i++){
+		(*this)[i].position = Shape[i].position + Masscenter.position;
+	}
+}
+
+void SOLID::putPOS( double x, double y ){
+	Masscenter.position = sf::Vector2f( x, y );
+// redraw the shape around the mass center
+	for(int i=0; i<this->getVertexCount(); i++){
+		(*this)[i].position = Shape[i].position + Masscenter.position;
+	}
+}
+
+void SOLID::putPOS( sf::Vector2f POS ){
+	Masscenter.position = POS;
 // redraw the shape around the mass center
 	for(int i=0; i<this->getVertexCount(); i++){
 		(*this)[i].position = Shape[i].position + Masscenter.position;

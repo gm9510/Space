@@ -17,7 +17,8 @@ int main(){
 			if(event.type == Event::Closed) window.close();
 		   //Update Inputs
 			else if(event.type == Event::KeyPressed){
-				if (event.key.code==Keyboard::Up)  input = 0;
+				if (event.key.code==Keyboard::Space)  input = 4;
+				else if (event.key.code==Keyboard::Up) input = 0;
 				else if (event.key.code==Keyboard::Down)  input = 1;
 				else if (event.key.code==Keyboard::Left) input = 2;
 				else if (event.key.code==Keyboard::Right) input = 3;

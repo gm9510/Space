@@ -1,6 +1,17 @@
 #include "header.h"
 
 GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
+	//Bullet Initialized
+	Bullet.resize(3);
+	Bullet.setPrimitiveType(sf::TriangleStrip);
+
+	Bullet[0].position = sf::Vector2f( 0.f,0.f );
+	Bullet[1].position = sf::Vector2f( 10.f,0.f );
+	Bullet[2].position = sf::Vector2f( 5.f,-30.f );
+	
+	Bullet.setPhysics();
+	Bullet_draw = true;
+
 	//Player initilized
 	Player.resize(4);
 	Player.setPrimitiveType(sf::TriangleStrip);
@@ -32,22 +43,14 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 //........................................
 //         Player Movement
 //........................................
-	switch(key_input){
-			case 0: //UP
-				Player.MovePOS( 0, -0.01*time.asMicroseconds() );
-			break;
-            case 1: //DOWN
-				Player.MovePOS( 0, 0.01*time.asMicroseconds() );
-			break;
-			case 2: //LEFT
-				Player.MovePOS( -0.01*time.asMicroseconds(), 0 );
-			break;
-			case 3: //RIGHT
-				Player.MovePOS( 0.01*time.asMicroseconds(), 0 );
-			break;	
-		}
+	
+	Player.KeyInputs( key_input, Bullet, 0.01*time.asMicroseconds() );
+
 	if(!InBoundary( Player )){
 		Player.resetPOS();
+	}
+	if(!InBoundary( Bullet )){
+		Bullet.MovePOS( -300, -300 );
 	}
 //........................................
 //         Enemy Movement
@@ -67,9 +70,10 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 	
 	if(Player.getBounds().intersects(Enemy.getBounds())){
 		std::cout<< "intersects"<<  std::endl;
-		Enemy.MovePOS( 0, -300 );
+		Enemy.putPOS( 0, -100 );
+		Bullet.putPOS( -100, -100 );
 		Enemy_draw = false;
-		Player.resetPOS();
+		Bullet_draw = false;
 	}
 	else{
 		//std::cout<< "do not intersects"<<  std::endl;
@@ -79,7 +83,8 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 
 void GAME::DRAW(){
 	G_window.clear(sf::Color::Black);
-	G_window.draw(Enemy);
+	if(Bullet_draw) G_window.draw(Bullet);
+	if(Enemy_draw) G_window.draw(Enemy);
 	G_window.draw(Player);
 	G_window.display();
 }
