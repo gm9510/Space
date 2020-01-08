@@ -10,6 +10,7 @@ GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	Bullet[2].position = sf::Vector2f( 5.f,-30.f );
 	
 	Bullet.setPhysics();
+	Bullet.Velocity = sf::Vector2f( 0.f,0.f );
 	Bullet_draw = true;
 
 	//Player initilized
@@ -49,8 +50,16 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 	if(!InBoundary( Player )){
 		Player.resetPOS();
 	}
+
 	if(!InBoundary( Bullet )){
-		Bullet.MovePOS( -300, -300 );
+		Bullet.putPOS( -300, -300 );
+		Bullet.Velocity = sf::Vector2f( 0.f,0.f );
+		Bullet_draw = false;
+	}
+	else{
+		Bullet_draw = true;
+		Bullet.Velocity = sf::Vector2f( 0.f,-0.025 );
+		Bullet.Inertia( time.asMicroseconds() );
 	}
 //........................................
 //         Enemy Movement
@@ -68,7 +77,7 @@ bool GAME::UpDateStatus( int key_input, sf::Time time, double&  vel){
 //         Collisions
 //........................................
 	
-	if(Player.getBounds().intersects(Enemy.getBounds())){
+	if(Enemy.getBounds().intersects(Bullet.getBounds())){
 		std::cout<< "intersects"<<  std::endl;
 		Enemy.putPOS( 0, -100 );
 		Bullet.putPOS( -100, -100 );

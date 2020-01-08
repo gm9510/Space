@@ -19,7 +19,8 @@ void PLAYER::KeyInputs( int input, SOLID& bullet, double P_v ){
 			this->MovePOS( P_v, 0 );
 		break;
 		case 4: //SPACE
-			bullet.putPOS( this->Masscenter.position );
+			if( bullet.Masscenter.position.x < 0 || bullet.Masscenter.position.y < 0 )
+				bullet.putPOS( this->Masscenter.position );
 		break;
 	}
 }

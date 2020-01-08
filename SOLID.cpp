@@ -19,6 +19,17 @@ void SOLID::MovePOS( double dx, double dy ){
 	}
 }
 
+void SOLID::MovePOS( sf::Vector2f POS ){// POS -> displacement ( dx, dy )
+
+	prev_Masscenter = Masscenter;
+	Masscenter.position += POS;
+
+	// redraw the shape around the mass center
+	for(int i=0; i<this->getVertexCount(); i++){
+		(*this)[i].position = Shape[i].position + Masscenter.position;
+	}
+}
+
 void SOLID::resetPOS(){
 	this->Masscenter.position = this->prev_Masscenter.position;
 // redraw the shape around the mass center
@@ -41,6 +52,10 @@ void SOLID::putPOS( sf::Vector2f POS ){
 	for(int i=0; i<this->getVertexCount(); i++){
 		(*this)[i].position = Shape[i].position + Masscenter.position;
 	}
+}
+
+void SOLID::Inertia( double delta_t){				
+	MovePOS( this->Velocity.x*delta_t, this->Velocity.y*delta_t );
 }
 
 void SOLID::setPhysics(){

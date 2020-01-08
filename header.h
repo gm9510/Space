@@ -9,10 +9,12 @@ public:
 	SOLID();
 	SOLID( int nodes );
 	void MovePOS( double dx, double dy );
+	void MovePOS( sf::Vector2f POS );
 	void resetPOS();
 	void setPhysics();
 	void putPOS( double x, double y );
 	void putPOS( sf::Vector2f POS );
+	void Inertia( double delta_t ); //Lineal inertial movement
 	sf::Vector2f Velocity;
 	sf::Vertex Masscenter;
 	sf::Vertex prev_Masscenter;
@@ -23,6 +25,7 @@ class PLAYER : public SOLID{
 	PLAYER();
 //	void shoot( SOLID bullet );
 	void KeyInputs( int input, SOLID& bullet, double P_v );
+	
 };
 
 class GAME{
