@@ -9,8 +9,7 @@ int main(){
 	Clock clock;
 	Time time = clock.getElapsedTime();
 	int input = -1;
-	double vel = 0.01f;
-	
+
 	while(window.isOpen()){
 		Event event;
 		while(window.pollEvent(event)){
@@ -32,8 +31,8 @@ int main(){
 			//Update Time
 		time = clock.getElapsedTime();
 //		frames = 1.f/ time.asSeconds();
-		game.UpDateStatus( input, time, vel);
-		game.DRAW();
+		game.Update( input, time );
+		game.Draw();
 		clock.restart();
 	}
 return 0;

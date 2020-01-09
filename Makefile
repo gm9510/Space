@@ -10,6 +10,8 @@ main.o : main.cpp header.h
 	$(CC) -c main.cpp
 GAME.o : GAME.cpp header.h
 	$(CC) -c GAME.cpp
+GAME.o : SPACE.cpp header.h
+	$(CC) -c SPACE.cpp
 SOLID.o : SOLID.cpp header.h
 	$(CC) -c SOLID.cpp
 PLAYER.o : PLAYER.cpp header.h
