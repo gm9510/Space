@@ -1,5 +1,5 @@
-#ifndef SPACE_HEADER
-#define SPACE_HEADER
+#ifndef _SOLID_CLASS_
+#define _SOLID_CLASS_
 
 #include <iostream>
 #include <SFML/Graphics.hpp>

@@ -52,7 +52,7 @@ void PlaySTATE::Update( GAME* game ){
 //         Change STATE
 //........................................
 	if(game->G_input == 10 ){
-		std::unique_ptr<STATE> Menu( new MenuSTATE( My_window ) );
+		std::unique_ptr<STATE> Menu( new MenuSTATE( My_window, game->font ) );
 		this->ChangeState(game, Menu);
 	}
 //........................................
