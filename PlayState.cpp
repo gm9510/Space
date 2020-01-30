@@ -1,6 +1,12 @@
-#include "header.h"
+#include "GState.h"
+#include "GEngine.h"
+#include "SOLID.h"
 
-SPACE::SPACE( sf::RenderWindow& window ): G_window(window) {
+//**********************************************************
+//               Play State Class Definition.
+//**********************************************************
+
+PlaySTATE::PlaySTATE( sf::RenderWindow& window ) : My_window(window){ 
 	//Bullet Initialized
 	Bullet.resize(3);
 	Bullet.setPrimitiveType(sf::TriangleStrip);
@@ -41,13 +47,20 @@ SPACE::SPACE( sf::RenderWindow& window ): G_window(window) {
 	Enemy_draw = true;
 }
 
-bool SPACE::Update( int key_input, sf::Time time ){
+void PlaySTATE::Update( GAME* game ){
+//........................................
+//         Change STATE
+//........................................
+	if(game->G_input == 10 ){
+		std::unique_ptr<STATE> Menu( new MenuSTATE( My_window ) );
+		this->ChangeState(game, Menu);
+	}
 //........................................
 //         Player Movement
 //........................................
-	
-	Player.KeyInputs( key_input, Bullet, 0.01*time.asMicroseconds() );
 
+	std::cout<<"time: "<<game->G_time.asMicroseconds()<<std::endl;	
+	Player.KeyInputs( game->G_input, Bullet, 0.01*game->G_time.asMicroseconds() );
 	if(!InBoundary( Player )){
 		Player.resetPOS();
 	}
@@ -60,7 +73,7 @@ bool SPACE::Update( int key_input, sf::Time time ){
 	else{
 		Bullet_draw = true;
 		Bullet.Velocity = sf::Vector2f( 0.f,-0.025 );
-		Bullet.Inertia( time.asMicroseconds() );
+		Bullet.Inertia( game->G_time.asMicroseconds() );
 	}
 //........................................
 //         Enemy Movement
@@ -71,7 +84,7 @@ bool SPACE::Update( int key_input, sf::Time time ){
 			Enemy.resetPOS();
 		}
 			else{
-			Enemy.Inertia( time.asMicroseconds() );
+			Enemy.Inertia( game->G_time.asMicroseconds() );
 		}
 	}
 //........................................
@@ -88,18 +101,17 @@ bool SPACE::Update( int key_input, sf::Time time ){
 	else{
 		//std::cout<< "do not intersects"<<  std::endl;
 	}
-
 }
 
-void SPACE::Draw(){
-	G_window.clear(sf::Color::Black);
-	if(Bullet_draw) G_window.draw(Bullet);
-	if(Enemy_draw) G_window.draw(Enemy);
-	G_window.draw(Player);
-	G_window.display();
+void PlaySTATE::Draw( GAME* game ){
+	My_window.clear(sf::Color::Black);
+	if(Bullet_draw) My_window.draw(Bullet);
+	if(Enemy_draw) My_window.draw(Enemy);
+	My_window.draw(Player);
+	My_window.display();
 }
 
-bool SPACE::InBoundary( SOLID& solid_obj ){
+bool PlaySTATE::InBoundary( SOLID& solid_obj ){
 
 	for(int i=0; i<solid_obj.getVertexCount(); i++){
 		if( solid_obj[i].position.x < 0 || solid_obj[i].position.x > 600 )

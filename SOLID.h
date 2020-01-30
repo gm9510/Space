@@ -1,6 +1,9 @@
+#ifndef SPACE_HEADER
+#define SPACE_HEADER
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <vector> 
+#include <vector>
 
 class SOLID : public sf::VertexArray{
 private:
@@ -28,37 +31,4 @@ class PLAYER : public SOLID{
 	
 };
 
-class SPACE{
-  private:
-	sf::RenderWindow& G_window;
-  public:
-	SPACE( sf::RenderWindow& window ); //Intialization
-	void ChangeState();
- 	bool Update( int key_input, sf::Time time );
-	void Draw();
-	bool InBoundary( SOLID& solid_obj );
-	bool Enemy_draw, Bullet_draw;
-	PLAYER Player;
-	SOLID Enemy, Bullet;
-};
-
-class MENU{
-  public:
-	MENU();
-	void ChangeState();
-	void Update();
-	void Draw();
-};
-
-class GAME{
-  private:
-	sf::RenderWindow& G_window;
-//	MENU MenuState;
-	SPACE SpaceState;
-  public:
-	GAME( sf::RenderWindow& window );
-	void ChangeState();
-	void Update( int key_input, sf::Time time );
-	void Draw();
-};
-
+#endif
