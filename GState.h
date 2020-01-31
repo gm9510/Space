@@ -6,6 +6,8 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "SOLID.h"
+#include "UIText.h"
+
 //Forward Declaration---------------------------------
 class GAME;
 
@@ -24,6 +26,7 @@ class MenuSTATE : public STATE{
 	sf::VertexArray Tri;
 	sf::Font& font;
 	sf::Text Game_title;
+	BUTTON Start_Button;
   public:
 	MenuSTATE( sf::RenderWindow& window, sf::Font& );
 	void Update(GAME* game);
