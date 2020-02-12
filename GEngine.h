@@ -12,7 +12,8 @@ class GAME{
 	sf::RenderWindow& G_window;
 	std::unique_ptr<STATE> current_state;
   public:
-	sf::Font font;
+	sf::Font title_font;
+	sf::Font txt_font;
 	int G_input;
 	sf::Time G_time;
 	GAME( sf::RenderWindow& window );

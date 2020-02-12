@@ -3,14 +3,10 @@
 
 GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	
-	if (!font.loadFromFile("Fonts/Star Trek Enterprise Future.ttf")){
-    // error...
-	}
-	else{
-		std::cout<<"Font loaded succesfully"<<std::endl;
-	}
+	title_font.loadFromFile("Fonts/Star Trek Enterprise Future.ttf");
+	txt_font.loadFromFile("Fonts/data-unifon.ttf");
 	
-	std::unique_ptr<STATE> init_state( new MenuSTATE(G_window,font) );
+	std::unique_ptr<STATE> init_state( new MenuSTATE(G_window, title_font, txt_font) );
 	current_state = std::move( init_state );
  }
 

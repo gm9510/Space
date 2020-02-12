@@ -6,22 +6,25 @@
 //               Menu State Class Definition.
 //**********************************************************
 
-MenuSTATE::MenuSTATE( sf::RenderWindow& window, sf::Font& G_font ) : My_window(window), font(G_font){ 
+MenuSTATE::MenuSTATE( sf::RenderWindow& window, sf::Font& A_font, sf::Font& B_font ) : My_window(window), title_font(A_font), txt_font(B_font) { 
 //--Tri initilized----------------------------------------------------
-
 
 //--------------------------------------------------------------------
 //				-->Text initialization
 //--------------------------------------------------------------------
-	Game_title.setString("Space Bullet Hell");
-	Game_title.setFont( font );
-	Game_title.setCharacterSize( 80 );
-	Game_title.setPosition( 40, 0 );
+	UI.txt_list.push_back( sf::Text("Space Bullet Hell", title_font, 80) );
+	UI.txt_list.at(0).setPosition( 40, 0 );
+	
+	UI.txt_list.push_back( sf::Text("by Evil Tomato", title_font, 40) );
+	UI.txt_list.at(1).setPosition( 300, 80 );
+
+	UI.txt_list.push_back( sf::Text("Controls: \n 1. arrows to move. \n 2. space bar to shoot. ", txt_font, 20) );
+	UI.txt_list.at(2).setPosition( 200, 200 );
 
 	Start_Button.setString("START");
-	Start_Button.setFont( font );
+	Start_Button.setFont( title_font );
 	Start_Button.setCharacterSize( 60 );
-	Start_Button.setPosition( 265, 265 );
+	Start_Button.setPosition( 220, 300 );
 	Start_Button.setButton( 10 );
 }
 
@@ -39,7 +42,7 @@ void MenuSTATE::Update( GAME* game ){
 
 void MenuSTATE::Draw( GAME* game ){
 	My_window.clear(sf::Color::Black);
-	My_window.draw( Game_title );
+	My_window.draw( UI );
 	My_window.draw( Start_Button );
 	My_window.display();
 }

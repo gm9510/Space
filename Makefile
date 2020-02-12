@@ -2,7 +2,7 @@ CC = g++ -std=c++11
 
 SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
-objects = main.o GEngine.o VirtualState.o PlayState.o MenuState.o SOLID.o PLAYER.o BUTTON.o
+objects = main.o GEngine.o VirtualState.o PlayState.o MenuState.o SOLID.o PLAYER.o BUTTON.o TEXT.o
 
 sfml.app : $(objects)
 	$(CC) $(objects) -o sfml.app $(SFML)
@@ -22,5 +22,7 @@ MenuState.o : MenuState.cpp GState.h GEngine.h
 	$(CC) -c MenuState.cpp
 BUTTON.o : BUTTON.cpp UIText.h
 	$(CC) -c BUTTON.cpp
+TEXT.o : TEXT.cpp UIText.h
+	$(CC) -c TEXT.cpp
 clean :
 	-rm sfml.app $(objects)

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <memory>
+#include <vector>
 
 class BUTTON : public sf::Drawable {
   private:
@@ -18,6 +20,14 @@ class BUTTON : public sf::Drawable {
 	void setPosition( double , double );
 	void setButton( double );
 	sf::FloatRect getBounds();
+};
+
+class TEXT : public sf::Drawable {
+  private:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+  public:
+	TEXT( );
+	std::vector<sf::Text> txt_list;
 };
 
 #endif

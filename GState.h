@@ -24,11 +24,12 @@ class MenuSTATE : public STATE{
   private:
 	sf::RenderWindow& My_window;
 	sf::VertexArray Tri;
-	sf::Font& font;
-	sf::Text Game_title;
+	sf::Font title_font;
+	sf::Font txt_font;
 	BUTTON Start_Button;
+	TEXT UI;
   public:
-	MenuSTATE( sf::RenderWindow& window, sf::Font& );
+	MenuSTATE( sf::RenderWindow& window, sf::Font&, sf::Font& );
 	void Update(GAME* game);
 	void Draw(GAME* game);
 };
