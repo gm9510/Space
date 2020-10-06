@@ -51,6 +51,8 @@ void PlaySTATE::Update( GAME* game ){
 //........................................
 //         Change STATE
 //........................................
+	if(!Enemy_draw) game->G_input=10;
+
 	if(game->G_input == 10 ){
 		std::unique_ptr<STATE> Menu( new MenuSTATE( My_window, game->title_font, game->txt_font ) );
 		this->ChangeState(game, Menu);
@@ -101,6 +103,7 @@ void PlaySTATE::Update( GAME* game ){
 	else{
 		//std::cout<< "do not intersects"<<  std::endl;
 	}
+
 }
 
 void PlaySTATE::Draw( GAME* game ){

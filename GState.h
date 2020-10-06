@@ -11,7 +11,7 @@
 //Forward Declaration---------------------------------
 class GAME;
 
-class STATE{ 
+class STATE{ // Virtual which defines the game states
   public:
 	virtual void Update(GAME* game) = 0;
 	virtual void Draw(GAME* game) = 0;
