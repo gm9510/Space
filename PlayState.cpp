@@ -51,7 +51,6 @@ void PlaySTATE::Update( GAME* game ){
 //........................................
 //         Change STATE
 //........................................
-	if(!Enemy_draw) game->G_input=10;
 
 	if(game->G_input == 10 ){
 		std::unique_ptr<STATE> Menu( new MenuSTATE( My_window, game->title_font, game->txt_font ) );
@@ -61,7 +60,6 @@ void PlaySTATE::Update( GAME* game ){
 //         Player Movement
 //........................................
 
-	std::cout<<"time: "<<game->G_time.asMicroseconds()<<std::endl;	
 	Player.KeyInputs( game->G_input, Bullet, 0.01*game->G_time.asMicroseconds() );
 	if(!InBoundary( Player )){
 		Player.resetPOS();
@@ -94,7 +92,6 @@ void PlaySTATE::Update( GAME* game ){
 //........................................
 	
 	if(Enemy.getBounds().intersects(Bullet.getBounds())){
-		std::cout<< "intersects"<<  std::endl;
 		Enemy.putPOS( 0, -100 );
 		Bullet.putPOS( -100, -100 );
 		Enemy_draw = false;

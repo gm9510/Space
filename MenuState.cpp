@@ -18,7 +18,7 @@ MenuSTATE::MenuSTATE( sf::RenderWindow& window, sf::Font& A_font, sf::Font& B_fo
 	UI.txt_list.push_back( sf::Text("by Evil Tomato", title_font, 40) );
 	UI.txt_list.at(1).setPosition( 300, 80 );
 
-	UI.txt_list.push_back( sf::Text("Controls: \n 1. arrows to move. \n 2. space bar to shoot. ", txt_font, 20) );
+	UI.txt_list.push_back( sf::Text("Controls: \n 1. arrows to move. \n 2. space bar to shoot. \n 3. q back to menu", txt_font, 20) );
 	UI.txt_list.at(2).setPosition( 200, 200 );
 
 	Start_Button.setString("START");

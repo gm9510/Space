@@ -23,6 +23,15 @@ public:
 	sf::Vertex prev_Masscenter;
 };
 
+class SOLID_ELEMENTS : public sf::Drawable {
+  private:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	
+  public:
+	SOLID_ELEMENTS();
+	std::vector<SOLID> solid_elements;
+};
+
 class PLAYER : public SOLID{
   public:
 	PLAYER();

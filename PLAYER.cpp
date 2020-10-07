@@ -6,12 +6,10 @@ PLAYER::PLAYER(){
 void PLAYER::KeyInputs( int input, SOLID& bullet, double P_v ){
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-		std::cout<<"Player D_x: " << P_v<<std::endl;
 		this->MovePOS( -P_v, 0 );
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
 	    // move right...
-		std::cout<<"Player D_x: " << P_v<<std::endl;
 		this->MovePOS( P_v, 0 );
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){

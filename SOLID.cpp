@@ -9,7 +9,6 @@ Masscenter.color = sf::Color::White;
 }
 
 void SOLID::MovePOS( double dx, double dy ){
-	std::cout<<"Player: Move D_x: " << dx<<std::endl;
 	prev_Masscenter.position = Masscenter.position;
 	Masscenter.position.x += dx;
 	Masscenter.position.y += dy;
@@ -55,7 +54,6 @@ void SOLID::putPOS( sf::Vector2f POS ){
 }
 
 void SOLID::Inertia( double delta_t){
-	std::cout<<"Enenmy: Inertia D_x: " << Velocity.x*delta_t <<" delta_t: "<<delta_t<<std::endl;
 	prev_Masscenter.position = Masscenter.position;
 	Masscenter.position.x += Velocity.x*delta_t ;
 	Masscenter.position.y += Velocity.y*delta_t ;
