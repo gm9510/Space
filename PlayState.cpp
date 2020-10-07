@@ -17,7 +17,6 @@ PlaySTATE::PlaySTATE( sf::RenderWindow& window ) : My_window(window){
 	
 	Bullet.setPhysics();
 	Bullet.Velocity = sf::Vector2f( 0.f,0.f );
-	Bullet_draw = true;
 
 	//Player initilized
 	Player.resize(4);
@@ -44,7 +43,10 @@ PlaySTATE::PlaySTATE( sf::RenderWindow& window ) : My_window(window){
 	
 	Enemy.Velocity = sf::Vector2f( 0.01,0.f );
 	Enemy.setPhysics();
-	Enemy_draw = true;
+	
+	SE.solid_elements.push_back(Enemy);
+	SE.solid_elements.push_back(Bullet);
+	
 }
 
 void PlaySTATE::Update( GAME* game ){
@@ -107,6 +109,7 @@ void PlaySTATE::Draw( GAME* game ){
 	My_window.clear(sf::Color::Black);
 	if(Bullet_draw) My_window.draw(Bullet);
 	if(Enemy_draw) My_window.draw(Enemy);
+	My_window.draw( SE );
 	My_window.draw(Player);
 	My_window.display();
 }

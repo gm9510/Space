@@ -47,6 +47,7 @@ class PlaySTATE : public STATE{
 	bool Enemy_draw, Bullet_draw;
 	PLAYER Player;
 	SOLID Enemy, Bullet;
+	SOLID_ELEMENTS SE;
 };
 
 #endif

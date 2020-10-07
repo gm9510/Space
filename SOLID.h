@@ -11,6 +11,7 @@ private:
 public:
 	SOLID();
 	SOLID( int nodes );
+	bool draw = true;
 	void MovePOS( double dx, double dy );
 	void MovePOS( sf::Vector2f POS );
 	void resetPOS();
