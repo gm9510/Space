@@ -5,13 +5,23 @@ SOLID::SOLID(){
 Masscenter.color = sf::Color::White;
 } //Default constructor
 
-SOLID::SOLID( sf::PrimitiveType pt, int type ){
-	this->resize(type);
-	this->setPrimitiveType(pt);
-	
-	Masscenter.color = sf::Color::White;
+SOLID::SOLID( int type ){
+
 	switch( type ){
+		case 3:
+			this->resize(type);
+			this->setPrimitiveType(sf::Triangles);
+			std::cout<<this->getVertexCount()<<std::endl;
+			(*this)[0].position = sf::Vector2f( 0.f,0.f );
+			(*this)[1].position = sf::Vector2f( 5.f,0.f );
+			(*this)[2].position = sf::Vector2f( 2.5,-20.f );
+			(*this)[0].color = sf::Color::Blue;
+			(*this)[1].color = sf::Color::Blue;
+			(*this)[2].color = sf::Color::Blue;
+		break;
 		case 8:
+			this->resize(type);
+			this->setPrimitiveType(sf::TriangleFan);
 			(*this)[0].position = sf::Vector2f(0.f,0.f);
 			(*this)[0].color = sf::Color::Red;
 			for(int i=1; i<8; i++ ){
@@ -20,6 +30,7 @@ SOLID::SOLID( sf::PrimitiveType pt, int type ){
 			}
 		break;
 	}
+	Masscenter.color = sf::Color::White;
 	this->setPhysics();
 }
 

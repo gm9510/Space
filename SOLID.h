@@ -11,7 +11,7 @@ private:
 	std::vector<sf::Vertex> Shape;
 public:
 	SOLID();
-	SOLID( sf::PrimitiveType pt, int type );
+	SOLID( int type );
 	bool draw_me = true;
 	void MovePOS( double dx, double dy );
 	void MovePOS( sf::Vector2f POS );
@@ -37,9 +37,7 @@ class SOLID_ELEMENTS : public sf::Drawable {
 class PLAYER : public SOLID{
   public:
 	PLAYER();
-//	void shoot( SOLID bullet );
 	void KeyInputs( int input, SOLID& bullet, double P_v );
-	
 };
 
 #endif

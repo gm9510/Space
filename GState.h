@@ -45,9 +45,9 @@ class PlaySTATE : public STATE{
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool InBoundary( SOLID& solid_obj );
 	PLAYER Player;
-	SOLID Blue;
 	SOLID Bullet;
 	SOLID_ELEMENTS Enemies;
+	SOLID White;
 };
 
 #endif

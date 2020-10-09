@@ -6,7 +6,7 @@
 //               Play State Class Definition.
 //**********************************************************
 
-PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window) { 
+PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window), White(3) { 
 	//Bullet Initialized
 	Bullet.resize(3);
 	Bullet.setPrimitiveType(sf::TriangleStrip);
@@ -17,7 +17,9 @@ PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window) {
 	
 	Bullet.setPhysics();
 	Bullet.Velocity = sf::Vector2f( 0.f,0.f );
-
+	
+	White.putPOS(300,300);
+	std::cout<<White.getVertexCount()<<std::endl;
 	//Player initilized
 	Player.resize(4);
 	Player.setPrimitiveType(sf::TriangleStrip);
@@ -30,7 +32,7 @@ PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window) {
 	
 	Player.setPhysics();
 	
-	Enemies.list.resize( 3 , SOLID( sf::TriangleFan, 8 ) );
+	Enemies.list.resize( 3 , SOLID( 8 ) );
 	for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it ){
 		int index = it - Enemies.list.begin();
 		it->putPOS(100.f + index*50.f ,20.f + index*40.f);
@@ -51,7 +53,7 @@ void PlaySTATE::Update( GAME* game ){
 //         Player Movement
 //........................................
 
-	Player.KeyInputs( game->G_input, Bullet, 0.01*game->G_time.asMicroseconds() );
+	Player.KeyInputs( game->G_input, White, 0.01*game->G_time.asMicroseconds() );
 	if(!InBoundary( Player )){
 		Player.resetPOS();
 	}
@@ -102,6 +104,7 @@ void PlaySTATE::Draw( GAME* game ){
 	if(Bullet.draw_me) My_window.draw(Bullet);
 	My_window.draw( Enemies );
 	My_window.draw(Player);
+	My_window.draw( White );
 	My_window.display();
 }
 

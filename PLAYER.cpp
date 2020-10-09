@@ -20,11 +20,10 @@ void PLAYER::KeyInputs( int input, SOLID& bullet, double P_v ){
 	    // move up...
 		this->MovePOS( 0, -P_v );
 	}
-
-	switch( input ){
-		case 4: //SPACE
-			if( bullet.Masscenter.position.x < 0 || bullet.Masscenter.position.y < 0 )
-				bullet.putPOS( this->Masscenter.position );
-		break;
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+		if( bullet.Masscenter.position.x < 0 || bullet.Masscenter.position.y < 0 )
+			bullet.putPOS( this->Masscenter.position );
+			//This would create the bullet 
 	}
+	
 }
