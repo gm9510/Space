@@ -4,8 +4,23 @@
 SOLID::SOLID(){
 Masscenter.color = sf::Color::White;
 } //Default constructor
-SOLID::SOLID( int nodes ): VertexArray( sf::TriangleStrip, nodes ){
-Masscenter.color = sf::Color::White;
+
+SOLID::SOLID( sf::PrimitiveType pt, int type ){
+	this->resize(type);
+	this->setPrimitiveType(pt);
+	
+	Masscenter.color = sf::Color::White;
+	switch( type ){
+		case 8:
+			(*this)[0].position = sf::Vector2f(0.f,0.f);
+			(*this)[0].color = sf::Color::Red;
+			for(int i=1; i<8; i++ ){
+				(*this)[i].position = sf::Vector2f(15.f*cos(1.57079633 - i*1.04719755),-15.f*sin(1.57079633 - i*1.04719755));
+				(*this)[i].color = sf::Color::Red;
+			}
+		break;
+	}
+	this->setPhysics();
 }
 
 void SOLID::MovePOS( double dx, double dy ){

@@ -34,7 +34,7 @@ void MenuSTATE::Update( GAME* game ){
 	if( sf::Mouse::isButtonPressed(sf::Mouse::Left) ){
 		mousePOS = sf::Mouse::getPosition(My_window);
 		if( Start_Bounds.contains( mousePOS.x, mousePOS.y ) ){
-			std::unique_ptr<STATE> Play( new PlaySTATE( My_window ) );
+			std::unique_ptr<STATE> Play( new PlaySTATE( My_window) );
 			this->ChangeState(game, Play);
 		}
 	}

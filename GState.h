@@ -44,10 +44,10 @@ class PlaySTATE : public STATE{
 	void Draw(GAME* game);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool InBoundary( SOLID& solid_obj );
-	bool Enemy_draw, Bullet_draw;
 	PLAYER Player;
-	SOLID Enemy, Bullet;
-	SOLID_ELEMENTS SE;
+	SOLID Blue;
+	SOLID Bullet;
+	SOLID_ELEMENTS Enemies;
 };
 
 #endif

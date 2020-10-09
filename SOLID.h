@@ -4,14 +4,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <cmath>
 
 class SOLID : public sf::VertexArray{
 private:
 	std::vector<sf::Vertex> Shape;
 public:
 	SOLID();
-	SOLID( int nodes );
-	bool draw = true;
+	SOLID( sf::PrimitiveType pt, int type );
+	bool draw_me = true;
 	void MovePOS( double dx, double dy );
 	void MovePOS( sf::Vector2f POS );
 	void resetPOS();
@@ -30,7 +31,7 @@ class SOLID_ELEMENTS : public sf::Drawable {
 	
   public:
 	SOLID_ELEMENTS();
-	std::vector<SOLID> solid_elements;
+	std::vector<SOLID> list;
 };
 
 class PLAYER : public SOLID{
