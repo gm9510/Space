@@ -25,12 +25,14 @@ PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window) {
 	
 	Player.setPhysics();
 	
-	Enemies.list.resize( 3 , SOLID( 8 ) );
+	Enemies.list.resize( 9 , SOLID( 8 ) );
 	for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it ){
 		int index = it - Enemies.list.begin();
-		it->putPOS(100.f + index*50.f ,20.f + index*40.f);
+		it->putPOS(30.f + index*40.f ,20.f);
 		it->Velocity = sf::Vector2f(0.0075,0.f);
 	}
+        leftSideEnemy = Enemies.list.begin();
+	rightSideEnemy = Enemies.list.end();
 }
 
 void PlaySTATE::Update( GAME* game ){
@@ -64,18 +66,7 @@ void PlaySTATE::Update( GAME* game ){
 //........................................
 //         Enemy Movement
 //........................................
-
-	for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it ){
-		if(it->draw_me){
-			if(!InBoundary( *it )){
-				it->Velocity = -it->Velocity;
-				it->resetPOS();
-			}
-				else{
-				it->Inertia( game->G_time.asMicroseconds() );
-			}
-		}
-	}
+	this->Movement( (double)game->G_time.asMicroseconds() );
 //........................................
 //         Collisions
 //........................................
@@ -110,4 +101,40 @@ bool PlaySTATE::InBoundary( SOLID& solid_obj ){
 			return 0;
 	}
 return 1;
+}
+
+void PlaySTATE::Movement( double dt ){
+	if( leftSideEnemy == rightSideEnemy ){
+		if(leftSideEnemy->draw_me){
+			if(!InBoundary( *leftSideEnemy )){
+				leftSideEnemy->Velocity = -leftSideEnemy->Velocity;
+				leftSideEnemy->resetPOS();
+			}
+			else leftSideEnemy->Inertia( dt );
+		}
+		else{
+		// End Game
+		}
+	}
+	else{
+		while( !leftSideEnemy->draw_me ){
+			if(leftSideEnemy == rightSideEnemy) break;
+			else leftSideEnemy++;
+		}
+		while( !rightSideEnemy->draw_me ){
+			if(rightSideEnemy == leftSideEnemy) break;
+			else rightSideEnemy--;
+		}
+	
+		if(!InBoundary( *leftSideEnemy ) || !InBoundary( *rightSideEnemy )){
+			for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it ){
+				it->Velocity = -it->Velocity;
+				it->resetPOS();
+			}
+		}
+		else{
+			for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it )
+				it->Inertia( dt );
+		}
+	}
 }

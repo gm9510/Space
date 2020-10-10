@@ -38,6 +38,7 @@ class PlaySTATE : public STATE{
   private:
 	sf::RenderWindow& My_window;
 	sf::VertexArray Tri;
+	void Movement( double );
   public:
 	PlaySTATE( sf::RenderWindow& window );
 	void Update(GAME* game);
@@ -47,6 +48,7 @@ class PlaySTATE : public STATE{
 	PLAYER Player;
 	SOLID Bullet;
 	SOLID_ELEMENTS Enemies;
+	std::vector<SOLID>::iterator leftSideEnemy,rightSideEnemy;
 	SOLID_ELEMENTS Bullets;
 };
 
