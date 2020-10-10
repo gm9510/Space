@@ -47,7 +47,7 @@ class PlaySTATE : public STATE{
 	PLAYER Player;
 	SOLID Bullet;
 	SOLID_ELEMENTS Enemies;
-	SOLID White;
+	SOLID_ELEMENTS Bullets;
 };
 
 #endif

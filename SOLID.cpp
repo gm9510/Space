@@ -11,13 +11,12 @@ SOLID::SOLID( int type ){
 		case 3:
 			this->resize(type);
 			this->setPrimitiveType(sf::Triangles);
-			std::cout<<this->getVertexCount()<<std::endl;
 			(*this)[0].position = sf::Vector2f( 0.f,0.f );
 			(*this)[1].position = sf::Vector2f( 5.f,0.f );
 			(*this)[2].position = sf::Vector2f( 2.5,-20.f );
-			(*this)[0].color = sf::Color::Blue;
-			(*this)[1].color = sf::Color::Blue;
-			(*this)[2].color = sf::Color::Blue;
+			(*this)[0].color = sf::Color::White;
+			(*this)[1].color = sf::Color::White;
+			(*this)[2].color = sf::Color::White;
 		break;
 		case 8:
 			this->resize(type);

@@ -6,20 +6,13 @@
 //               Play State Class Definition.
 //**********************************************************
 
-PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window), White(3) { 
+PlaySTATE::PlaySTATE( sf::RenderWindow& window) : My_window(window) { 
 	//Bullet Initialized
-	Bullet.resize(3);
-	Bullet.setPrimitiveType(sf::TriangleStrip);
-
-	Bullet[0].position = sf::Vector2f( 0.f,0.f );
-	Bullet[1].position = sf::Vector2f( 10.f,0.f );
-	Bullet[2].position = sf::Vector2f( 5.f,-30.f );
 	
-	Bullet.setPhysics();
-	Bullet.Velocity = sf::Vector2f( 0.f,0.f );
+	Bullets.list.push_back( SOLID(3) );
+	Bullets.list.at(0).putPOS(-300,-300);
 	
-	White.putPOS(300,300);
-	std::cout<<White.getVertexCount()<<std::endl;
+	
 	//Player initilized
 	Player.resize(4);
 	Player.setPrimitiveType(sf::TriangleStrip);
@@ -53,20 +46,20 @@ void PlaySTATE::Update( GAME* game ){
 //         Player Movement
 //........................................
 
-	Player.KeyInputs( game->G_input, White, 0.01*game->G_time.asMicroseconds() );
+	Player.KeyInputs( game->G_input, Bullets.list.at(0), 0.01*game->G_time.asMicroseconds() );
 	if(!InBoundary( Player )){
 		Player.resetPOS();
 	}
 
-	if(!InBoundary( Bullet )){
-		Bullet.putPOS( -300, -300 );
-		Bullet.Velocity = sf::Vector2f( 0.f,0.f );
-		Bullet.draw_me = false;
+	if(!InBoundary( Bullets.list.at(0) )){
+		Bullets.list.at(0).putPOS( -300, -300 );
+		Bullets.list.at(0).Velocity = sf::Vector2f( 0.f,0.f );
+		Bullets.list.at(0).draw_me = false;
 	}
 	else{
-		Bullet.draw_me = true;
-		Bullet.Velocity = sf::Vector2f( 0.f,-0.025 );
-		Bullet.Inertia( game->G_time.asMicroseconds() );
+		Bullets.list.at(0).draw_me = true;
+		Bullets.list.at(0).Velocity = sf::Vector2f( 0.f,-0.025 );
+		Bullets.list.at(0).Inertia( game->G_time.asMicroseconds() );
 	}
 //........................................
 //         Enemy Movement
@@ -87,11 +80,11 @@ void PlaySTATE::Update( GAME* game ){
 //         Collisions
 //........................................
 	for( auto it = Enemies.list.begin(); it != Enemies.list.end(); ++it ){
-		if(it->getBounds().intersects(Bullet.getBounds())){
+		if(it->getBounds().intersects(Bullets.list.at(0).getBounds())){
 			it->putPOS( 0, -100 );
-			Bullet.putPOS( -100, -100 );
+			Bullets.list.at(0).putPOS( -100, -100 );
 			it->draw_me = false;
-			Bullet.draw_me = false;
+			Bullets.list.at(0).draw_me = false;
 		}
 		else{
 			//std::cout<< "do not intersects"<<  std::endl;
@@ -101,10 +94,10 @@ void PlaySTATE::Update( GAME* game ){
 
 void PlaySTATE::Draw( GAME* game ){
 	My_window.clear(sf::Color::Black);
-	if(Bullet.draw_me) My_window.draw(Bullet);
+	if(Bullets.list.at(0).draw_me) My_window.draw(Bullets.list.at(0));
 	My_window.draw( Enemies );
 	My_window.draw(Player);
-	My_window.draw( White );
+	My_window.draw( Bullets );
 	My_window.display();
 }
 
