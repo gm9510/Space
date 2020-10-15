@@ -1,11 +1,11 @@
 #include "SOLID.h"
 
 
-SOLID::SOLID(){
+SOLID::SOLID(): lead(nullptr), draw_me(true), fire(false){
 Masscenter.color = sf::Color::White;
 } //Default constructor
 
-SOLID::SOLID( int type ){
+SOLID::SOLID( int type ) : lead(nullptr), draw_me(true), fire(false) {
 
 	switch( type ){
 		case 3:
@@ -112,4 +112,11 @@ void SOLID::setPhysics(){
 		Shape.push_back( sf::Vertex( buff ) );
 //		std::cout<<"["<<i<<"] x = "<< Shape[i].position.x << " y = "<< Shape[i].position.y <<std::endl;
 	}
+}
+
+sf::Vector2f SOLID::getPOS(){
+//------------------------------------------------------------------------------------------
+//       Returns de Masscenter position
+//------------------------------------------------------------------------------------------
+	return Masscenter.position;
 }

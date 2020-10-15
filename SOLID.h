@@ -9,10 +9,14 @@
 class SOLID : public sf::VertexArray{
 private:
 	std::vector<sf::Vertex> Shape;
+	sf::Vertex Masscenter;
+	sf::Vertex prev_Masscenter;
 public:
 	SOLID();
 	SOLID( int type );
-	bool draw_me = true;
+	SOLID* lead;
+	bool draw_me;
+	bool fire;
 	void MovePOS( double dx, double dy );
 	void MovePOS( sf::Vector2f POS );
 	void resetPOS();
@@ -20,9 +24,8 @@ public:
 	void putPOS( double x, double y );
 	void putPOS( sf::Vector2f POS );
 	void Inertia( double delta_t ); //Lineal inertial movement
+	sf::Vector2f getPOS();
 	sf::Vector2f Velocity;
-	sf::Vertex Masscenter;
-	sf::Vertex prev_Masscenter;
 };
 
 class SOLID_ELEMENTS : public sf::Drawable {
@@ -37,7 +40,7 @@ class SOLID_ELEMENTS : public sf::Drawable {
 class PLAYER : public SOLID{
   public:
 	PLAYER();
-	void KeyInputs( int input, SOLID& bullet, double P_v );
+	void KeyInputs( double );
 };
 
 #endif

@@ -10,9 +10,10 @@ GAME::GAME( sf::RenderWindow& window ) : G_window(window) {
 	current_state = std::move( init_state );
  }
 
-void GAME::Update( int in, sf::Time time ){
+void GAME::Update( int in, int loop ,sf::Time time ){
 	G_time = time;
 	G_input = in;
+	Gloop = loop;
 	current_state->Update( this );
 }
 

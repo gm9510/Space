@@ -10,6 +10,7 @@ int main(){
 	Clock clock;
 	Time time = clock.getElapsedTime();
 	int input = -1;
+	int loop = 0;
 
 	while(window.isOpen()){
 		Event event;
@@ -19,6 +20,7 @@ int main(){
 			else if(event.type == Event::KeyPressed){
 				if (event.key.code==Keyboard::Space)	input = 4;
 				else if (event.key.code==Keyboard::Q)	input = 10;
+				else if (event.key.code==Keyboard::R)	input = 14;
 				else input = -1;
 			}
 			else if(event.type == Event::KeyReleased){
@@ -28,10 +30,14 @@ int main(){
 		}
 //------Update Time----------------------------------------------------
 		time = clock.getElapsedTime();
-		game.Update( input, time );
-		game.Draw();
-		input = -1;
-		clock.restart();
+		if( time.asMilliseconds() > 16 ){
+			loop++;
+			game.Update( input, loop, time );
+			game.Draw();
+			input = -1;
+			clock.restart();
+		}
+		if(loop > 30) loop = 0;
 	}
 return 0;
 }

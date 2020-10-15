@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <random>
 #include <SFML/Graphics.hpp>
 #include "SOLID.h"
 #include "UIText.h"
@@ -45,11 +46,13 @@ class PlaySTATE : public STATE{
 	void Draw(GAME* game);
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool InBoundary( SOLID& solid_obj );
+	bool end_state;
 	PLAYER Player;
-	SOLID Bullet;
 	SOLID_ELEMENTS Enemies;
 	std::vector<SOLID>::iterator leftSideEnemy,rightSideEnemy;
 	SOLID_ELEMENTS Bullets;
+	std::default_random_engine Gen;
+	std::uniform_int_distribution<int> Dist;
 };
 
 #endif

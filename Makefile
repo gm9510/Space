@@ -1,4 +1,4 @@
-CC = g++ -std=c++11
+CC = g++ -g -std=c++11
 
 SFML = -lsfml-graphics -lsfml-window -lsfml-system
 

@@ -3,7 +3,7 @@
 PLAYER::PLAYER(){
 }
 
-void PLAYER::KeyInputs( int input, SOLID& bullet, double P_v ){
+void PLAYER::KeyInputs( double P_v ){
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		this->MovePOS( -P_v, 0 );
@@ -21,9 +21,7 @@ void PLAYER::KeyInputs( int input, SOLID& bullet, double P_v ){
 		this->MovePOS( 0, -P_v );
 	}
 	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-		if( bullet.Masscenter.position.x < 0 || bullet.Masscenter.position.y < 0 )
-			bullet.putPOS( this->Masscenter.position );
-			//This would create the bullet 
+		this->fire = true;
 	}
 	
 }

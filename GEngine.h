@@ -15,9 +15,10 @@ class GAME{
 	sf::Font title_font;
 	sf::Font txt_font;
 	int G_input;
+	int Gloop;
 	sf::Time G_time;
 	GAME( sf::RenderWindow& window );
-	void Update( int in, sf::Time time );
+	void Update( int , int, sf::Time );
 	void Draw();
 	void ChangeState( std::unique_ptr<STATE> & );
 };
