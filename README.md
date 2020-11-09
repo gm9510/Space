@@ -16,4 +16,4 @@ _To compile the game just run make in the main folder and run the sfml.app execu
 
 ## Autores ✒️
 
-* **Gustavo Marín** - *Developer* - [villanuevand](gm9510@gmail.com)
+* **Gustavo Marín** - *Developer* - [mail](gm9510@gmail.com)
